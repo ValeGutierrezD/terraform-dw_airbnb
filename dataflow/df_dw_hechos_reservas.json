@@ -1,0 +1,46 @@
+{
+	"name": "df_dw_hechos_reservas",
+	"properties": {
+		"folder": {
+			"name": "DW"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_tbl_reservas",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "cast1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          id_ciudad as string,",
+				"          precio as decimal(10,2),",
+				"          id_dia as string,",
+				"          id_habitacion as string,",
+				"          cant_personas as integer,",
+				"          superanfitrion as boolean,",
+				"          satisfaccion_huesped as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     query: 'select id_ciudad, precio, id_dia, id_habitacion, cant_personas,superanfitrion, satisfaccion_huesped from [dbo].[tbl_reservas]',",
+				"     format: 'query') ~> source1",
+				"source1 cast(output(",
+				"          precio as decimal(10,2)",
+				"     ),",
+				"     errors: true) ~> cast1"
+			]
+		}
+	}
+}
