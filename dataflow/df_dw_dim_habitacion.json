@@ -15,35 +15,47 @@
 					"name": "source1"
 				}
 			],
-			"sinks": [],
-			"transformations": [
+			"sinks": [
 				{
-					"name": "sort1"
-				},
-				{
-					"name": "aggregate1"
+					"dataset": {
+						"referenceName": "ds_dim_habitacion",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
 				}
 			],
+			"transformations": [],
 			"scriptLines": [
 				"source(output(",
-				"          id_reserva as integer,",
-				"          id_ciudad as string,",
-				"          precio as decimal(10,2),",
-				"          id_dia as string,",
 				"          id_habitacion as string,",
 				"          habitacion_compartida as boolean,",
-				"          habitacion_privada as boolean,",
-				"          cant_personas as integer,",
-				"          superanfitrion as boolean,",
-				"          satisfaccion_huesped as integer",
+				"          habitacion_privada as boolean",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     query: 'select distinct id_habitacion from [dbo].[tbl_reservas]',",
+				"     query: 'select distinct id_habitacion, habitacion_compartida, habitacion_privada  from [dbo].[tbl_reservas]',",
 				"     format: 'query') ~> source1",
-				"source1 sort(asc(id_habitacion, true)) ~> sort1",
-				"sort1 aggregate(columna1 = ERROR_FUNCTION('')) ~> aggregate1"
+				"source1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          id_habitacion as string,",
+				"          habitacion_compartida as boolean,",
+				"          habitacion_privada as boolean",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          id_habitacion,",
+				"          habitacion_compartida,",
+				"          habitacion_privada",
+				"     )) ~> sink1"
 			]
 		}
 	}
