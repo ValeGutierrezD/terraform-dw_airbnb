@@ -24,7 +24,11 @@
 					"name": "sink1"
 				}
 			],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "cast1"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          City as string,",
@@ -50,7 +54,16 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
-				"source1 sink(allowSchemaDrift: true,",
+				"source1 cast(output(",
+				"          Price as double,",
+				"          {Shared Room} as boolean,",
+				"          {Private Room} as string,",
+				"          {Person Capacity} as integer,",
+				"          Superhost as boolean,",
+				"          {Guest Satisfaction} as integer",
+				"     ),",
+				"     errors: true) ~> cast1",
+				"cast1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          id_reserva as integer,",
