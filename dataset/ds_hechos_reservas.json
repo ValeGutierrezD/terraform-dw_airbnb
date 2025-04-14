@@ -1,0 +1,57 @@
+{
+	"name": "ds_hechos_reservas",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sql_dw_reservas",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "DW"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id_reserva",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ciudad",
+				"type": "varchar"
+			},
+			{
+				"name": "precio",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "id_dia",
+				"type": "varchar"
+			},
+			{
+				"name": "id_habitacion",
+				"type": "varchar"
+			},
+			{
+				"name": "cant_personas",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "superanfitrion",
+				"type": "bit"
+			},
+			{
+				"name": "satisfaccion_huesped",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "hechos_reservas"
+		}
+	}
+}

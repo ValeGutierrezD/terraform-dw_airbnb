@@ -1,0 +1,24 @@
+{
+	"name": "ds_dim_dia",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sql_dw_reservas",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "DW"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id_dia",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "dim_dia"
+		}
+	}
+}

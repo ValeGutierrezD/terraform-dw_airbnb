@@ -1,0 +1,57 @@
+{
+	"name": "ds_tbl_reservas",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sql_db_reservas",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "DB"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id_reserva",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "id_ciudad",
+				"type": "varchar"
+			},
+			{
+				"name": "precio",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "id_dia",
+				"type": "varchar"
+			},
+			{
+				"name": "id_habitacion",
+				"type": "varchar"
+			},
+			{
+				"name": "cant_personas",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "superanfitrion",
+				"type": "bit"
+			},
+			{
+				"name": "satisfaccion_huesped",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "tbl_reservas"
+		}
+	}
+}
