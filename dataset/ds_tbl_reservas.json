@@ -35,6 +35,14 @@
 				"type": "varchar"
 			},
 			{
+				"name": "habitacion_compartida",
+				"type": "bit"
+			},
+			{
+				"name": "habitacion_privada",
+				"type": "bit"
+			},
+			{
 				"name": "cant_personas",
 				"type": "int",
 				"precision": 10
