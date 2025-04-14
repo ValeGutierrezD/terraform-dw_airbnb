@@ -24,7 +24,11 @@
 					"name": "sink1"
 				}
 			],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "sort1"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          City as string,",
@@ -50,7 +54,8 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
-				"source1 sink(allowSchemaDrift: true,",
+				"source1 sort(asc(City, true)) ~> sort1",
+				"sort1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          id_reserva as integer,",
