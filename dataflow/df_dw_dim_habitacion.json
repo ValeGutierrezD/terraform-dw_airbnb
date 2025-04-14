@@ -1,5 +1,5 @@
 {
-	"name": "df_dw_ciudad",
+	"name": "df_dw_dim_habitacion",
 	"properties": {
 		"folder": {
 			"name": "DW"
@@ -15,18 +15,13 @@
 					"name": "source1"
 				}
 			],
-			"sinks": [
-				{
-					"dataset": {
-						"referenceName": "ds_dim_ciudad",
-						"type": "DatasetReference"
-					},
-					"name": "sink1"
-				}
-			],
+			"sinks": [],
 			"transformations": [
 				{
 					"name": "sort1"
+				},
+				{
+					"name": "aggregate1"
 				}
 			],
 			"scriptLines": [
@@ -45,25 +40,10 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     query: 'select distinct id_ciudad from [dbo].[tbl_reservas]',",
+				"     query: 'select distinct id_habitacion from [dbo].[tbl_reservas]',",
 				"     format: 'query') ~> source1",
-				"source1 sort(asc(id_ciudad, true)) ~> sort1",
-				"sort1 sink(allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     input(",
-				"          ciudad as string",
-				"     ),",
-				"     deletable:false,",
-				"     insertable:true,",
-				"     updateable:false,",
-				"     upsertable:false,",
-				"     format: 'table',",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError',",
-				"     mapColumn(",
-				"          ciudad = id_ciudad",
-				"     )) ~> sink1"
+				"source1 sort(asc(id_habitacion, true)) ~> sort1",
+				"sort1 aggregate(columna1 = ERROR_FUNCTION('')) ~> aggregate1"
 			]
 		}
 	}
